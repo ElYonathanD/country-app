@@ -1,18 +1,21 @@
-import { useCountries } from '../hooks/useCountries'
 import { Country } from '../interfaces/country'
 import './countriesList.css'
 import CountryCard from './CountryCard'
-const CountriesList = () => {
-  const { countries } = useCountries()
-  if (countries) {
-    console.log('asjaskhdsajk')
-  }
 
+interface Props {
+  countries: Country[]
+  error: string
+}
+const CountriesList = ({ countries, error }: Props) => {
   return (
     <ul className='countries'>
-      {countries.map((country: Country) => (
-        <CountryCard key={country.cca2} country={country} />
-      ))}
+      {!error ? (
+        countries.map((country: Country) => (
+          <CountryCard key={country.cca2} country={country} />
+        ))
+      ) : (
+        <p>No hay países que mostrar</p>
+      )}
     </ul>
   )
 }
