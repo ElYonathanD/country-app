@@ -1,0 +1,17 @@
+.countries{
+  display: grid;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.countries li{
+  list-style: none;
+}
+
+@media(min-width: 768px){
+  .countries{
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+  }
+}

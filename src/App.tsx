@@ -1,9 +1,14 @@
 import './App.css'
+import CountriesList from './components/CountriesList'
 
 function App () {
+  const searchCountry = (e) =>{
+    console.log(e.target.value)
+  }
   return (
     <>
-      <p>React</p>
+      <input type="text" onChange={searchCountry} name="" id="" />
+      <CountriesList />
     </>
   )
 }

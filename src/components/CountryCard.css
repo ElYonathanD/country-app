@@ -1,0 +1,17 @@
+.card {
+  background-color: #282B30;
+  color: white;
+  border-radius: 10px;
+}
+
+.card .image{
+  border-radius: 10px 10px 0 0 ;
+  width: 100%;
+  height: 145px;
+}
+.card .info{
+  padding: 5px;
+  p, h2{
+    margin-block: 3px;
+  }
+}
