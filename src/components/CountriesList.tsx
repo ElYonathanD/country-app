@@ -1,16 +1,15 @@
+import { useContext } from 'react'
 import { Country } from '../interfaces/country'
 import './countriesList.css'
 import CountryCard from './CountryCard'
+import { countriesContext } from '../context/countriesContext'
 
-interface Props {
-  countries: Country[]
-  error: string
-}
-const CountriesList = ({ countries, error }: Props) => {
+const CountriesList = () => {
+  const { filteredCountries, error } = useContext(countriesContext)
   return (
     <ul className='countries'>
       {!error ? (
-        countries.map((country: Country) => (
+        filteredCountries.map((country: Country) => (
           <CountryCard key={country.cca2} country={country} />
         ))
       ) : (
