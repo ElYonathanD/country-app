@@ -6,10 +6,12 @@ interface Context {
   error: string
   getCountriesByRegion: (region: keyof Countries) => void
   searchCountries: (term: string) => void
+  getCountriesByCapital: (term: string) => void
 }
 export const countriesContext = createContext<Context>({
   filteredCountries: [],
   error: '',
   getCountriesByRegion: () => [],
-  searchCountries: () => []
+  searchCountries: () => [],
+  getCountriesByCapital: () => []
 })

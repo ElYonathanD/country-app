@@ -53,8 +53,30 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
     }
   }
 
+  const getCountriesByCapital = async (capital: string) => {
+    if (capital === '') {
+      setError('')
+      setFilteredCountries(countries.all)
+      return
+    }
+    try {
+      const res = await fetch(`${API_URL}/capital/${capital}`)
+      if (res.status == 200) {
+        const data = await res.json()
+        setFilteredCountries(data)
+        setError('')
+      } else {
+        setError('No hay países que mostrar')
+      }
+    } catch (error) {
+      console.error(error)
+      setError('Error al obtener países')
+    }
+  }
+
   const searchCountries = async (term: string) => {
-    if (term == '') {
+    if (term === '') {
+      setError('')
       setFilteredCountries(countries.all)
       return
     }
@@ -82,7 +104,8 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         filteredCountries,
         error,
         getCountriesByRegion,
-        searchCountries
+        searchCountries,
+        getCountriesByCapital
       }}
     >
       {children}

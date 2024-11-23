@@ -2,23 +2,10 @@ import { useContext, useState } from 'react'
 import { Region } from '../interfaces/country'
 import { countriesContext } from '../context/countriesContext'
 
-let debounceTimeout: number | null = null
-const Header = () => {
+const FilterRegion = () => {
   const [activeRegion, setActiveRegion] = useState<Region>()
-  const { filteredCountries, error, getCountriesByRegion, searchCountries } =
+  const { filteredCountries, error, getCountriesByRegion } =
     useContext(countriesContext)
-
-  const searchCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = e.target.value
-
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout)
-    }
-
-    debounceTimeout = setTimeout(() => {
-      searchCountries(searchValue)
-    }, 400)
-  }
 
   const handleRegionClick = (region: Region) => {
     setActiveRegion(region)
@@ -29,7 +16,6 @@ const Header = () => {
       <p>
         {!error ? `${filteredCountries.length} resultados` : '0 resultados'}
       </p>
-      <input type='text' onChange={searchCountry} name='search' />
       {Object.values(Region).map((region) => (
         <button
           key={region}
@@ -50,4 +36,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default FilterRegion
