@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { Country } from '../interfaces/country'
 import './CountryCard.css'
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
 }
 const CountryCard = ({ country }: Props) => {
   return (
-    <li className='card'>
+    <Link to={`/country/${country.cca2}`} className='card'>
       <img className='image' src={country.flags.png} alt={country.flags.alt} />
       <div className='info'>
         <h2>{country.name.common}</h2>
@@ -18,7 +19,7 @@ const CountryCard = ({ country }: Props) => {
           {country.capital?.join(', ')}
         </p>
       </div>
-    </li>
+    </Link>
   )
 }
 

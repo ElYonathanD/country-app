@@ -21,6 +21,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   })
   const [error, setError] = useState('')
   const [filteredCountries, setFilteredCountries] = useState<Country[]>([])
+  const [currentCountry, setCurrentCountry] = useState<Country[]>([])
 
   const getCountries = useCallback(async () => {
     try {
@@ -39,7 +40,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   }, [])
 
   const getCountriesByRegion = async (region: keyof Countries) => {
-    if (countries[`${region}`].length) {
+    if (countries[`${region}`]?.length) {
       setFilteredCountries(countries[`${region}`])
       return
     }
@@ -49,6 +50,22 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       setCountries((current) => ({ ...current, [region]: data }))
       setFilteredCountries(data)
     } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const getCountryByCode = async (code: string) => {
+    try {
+      const res = await fetch(`${API_URL}/alpha/${code}`)
+      if (res.status == 200) {
+        const data = await res.json()
+        setCurrentCountry(data)
+        setError('')
+      } else {
+        setError('No hay países que mostrar')
+      }
+    } catch (error) {
+      setError('Error al obtener país')
       console.error(error)
     }
   }
@@ -103,9 +120,11 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       value={{
         filteredCountries,
         error,
+        currentCountry,
         getCountriesByRegion,
         searchCountries,
-        getCountriesByCapital
+        getCountriesByCapital,
+        getCountryByCode
       }}
     >
       {children}
