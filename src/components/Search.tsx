@@ -1,14 +1,21 @@
-import React, { useContext } from 'react'
-import { countriesContext } from '../context/countriesContext'
+import { Country } from '../interfaces/country'
 
 let debounceTimeout: number | null = null
 
 interface Props {
+  countries: Country[]
+  error: string
   capital?: boolean
+  getCountriesByCapital: (term: string) => void
+  searchCountries: (term: string) => void
 }
-const Search = ({ capital }: Props) => {
-  const { filteredCountries, searchCountries, error, getCountriesByCapital } =
-    useContext(countriesContext)
+const Search = ({
+  countries,
+  capital,
+  error,
+  getCountriesByCapital,
+  searchCountries
+}: Props) => {
   const searchCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value
 
@@ -26,9 +33,7 @@ const Search = ({ capital }: Props) => {
   }
   return (
     <div>
-      <p>
-        {!error ? `${filteredCountries.length} resultados` : '0 resultados'}
-      </p>{' '}
+      <p>{!error ? `${countries.length} resultados` : '0 resultados'}</p>{' '}
       <input type='text' onChange={searchCountry} name='search' />
     </div>
   )

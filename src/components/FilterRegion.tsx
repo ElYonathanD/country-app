@@ -1,11 +1,19 @@
-import { useContext, useState } from 'react'
-import { Region } from '../interfaces/country'
-import { countriesContext } from '../context/countriesContext'
+import { useState } from 'react'
+import { Country, Region } from '../interfaces/country'
 
-const FilterRegion = () => {
-  const [activeRegion, setActiveRegion] = useState<Region>()
-  const { filteredCountries, error, getCountriesByRegion } =
-    useContext(countriesContext)
+interface Props {
+  countries: Country[]
+  error: string
+  region: Region
+  getCountriesByRegion: (region: Region) => void
+}
+const FilterRegion = ({
+  countries,
+  error,
+  getCountriesByRegion,
+  region
+}: Props) => {
+  const [activeRegion, setActiveRegion] = useState<Region>(region)
 
   const handleRegionClick = (region: Region) => {
     setActiveRegion(region)
@@ -13,9 +21,7 @@ const FilterRegion = () => {
   }
   return (
     <div>
-      <p>
-        {!error ? `${filteredCountries.length} resultados` : '0 resultados'}
-      </p>
+      <p>{!error ? `${countries.length} resultados` : '0 resultados'}</p>
       {Object.values(Region).map((region) => (
         <button
           key={region}

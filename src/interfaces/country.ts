@@ -134,6 +134,8 @@ export enum Status {
 
 export interface Countries {
   all: Country[]
+  byName: Country[]
+  byCapital: Country[]
   Africa: Country[]
   Americas: Country[]
   Antarctic: Country[]

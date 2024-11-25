@@ -1,17 +1,23 @@
 .card {
-  background-color: #282B30;
+  background-color: #282b30;
   color: white;
   border-radius: 10px;
 }
 
-.card .image{
-  border-radius: 10px 10px 0 0 ;
+.card .image {
+  border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 145px;
+  height: 170px;
 }
-.card .info{
+.card .info {
   padding: 5px;
-  p, h2{
+  p,
+  h2 {
     margin-block: 3px;
+  }
+}
+@media (min-width: 768px) {
+  .card .image {
+    height: 145px;
   }
 }
