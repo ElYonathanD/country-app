@@ -1,14 +1,11 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import CountriesList from '../components/CountriesList'
 import FilterRegion from '../components/FilterRegion'
 import { countriesContext } from '../context/countriesContext'
 
 const CountriesByRegion = () => {
-  const { countries, error, getCountriesByRegion, region } =
+  const { countries, error, getCountriesByRegion, region, loading } =
     useContext(countriesContext)
-  useEffect(() => {
-    getCountriesByRegion(region)
-  }, [])
   return (
     <>
       <FilterRegion
@@ -17,7 +14,11 @@ const CountriesByRegion = () => {
         region={region}
         getCountriesByRegion={getCountriesByRegion}
       />
-      <CountriesList countries={countries[`${region}`]} error={error} />
+      <CountriesList
+        countries={countries[`${region}`]}
+        error={error}
+        loading={loading}
+      />
     </>
   )
 }

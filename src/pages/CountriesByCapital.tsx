@@ -4,7 +4,7 @@ import Search from '../components/Search'
 import { countriesContext } from '../context/countriesContext'
 
 const CountriesByCapital = () => {
-  const { countries, error, getCountriesByCapital, searchCountries } =
+  const { countries, error, getCountriesByCapital, searchCountries, loading } =
     useContext(countriesContext)
   return (
     <>
@@ -15,7 +15,11 @@ const CountriesByCapital = () => {
         getCountriesByCapital={getCountriesByCapital}
         searchCountries={searchCountries}
       />
-      <CountriesList countries={countries.byCapital} error={error} />
+      <CountriesList
+        countries={countries.byCapital}
+        error={error}
+        loading={loading}
+      />
     </>
   )
 }
