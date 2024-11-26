@@ -89,7 +89,6 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   }
 
   const getCountriesByCapital = async (capital: string) => {
-    setLoading(true)
     if (capital === '') {
       setError('')
       setCountries((current) => ({
@@ -99,6 +98,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       return
     }
     try {
+      setLoading(true)
       const res = await fetch(`${API_URL}/capital/${capital}`)
       if (res.status == 200) {
         const data = await res.json()
