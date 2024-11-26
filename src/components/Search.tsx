@@ -1,4 +1,5 @@
 import { Country } from '../interfaces/country'
+import './search.css'
 
 let debounceTimeout: number | null = null
 
@@ -32,9 +33,16 @@ const Search = ({
     }, 400)
   }
   return (
-    <div>
-      <p>{!error ? `${countries.length} resultados` : '0 resultados'}</p>{' '}
-      <input type='text' onChange={searchCountry} name='search' />
+    <div className='ctn-search'>
+      <p className='text-result'>
+        {!error ? `${countries.length} resultados` : '0 resultados'}
+      </p>{' '}
+      <input
+        type='text'
+        placeholder='Buscar'
+        onChange={searchCountry}
+        name='search'
+      />
     </div>
   )
 }

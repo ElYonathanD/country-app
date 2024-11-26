@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Country, Region } from '../interfaces/country'
-
+import './filterRegion.css'
 interface Props {
   countries: Country[]
   error: string
@@ -20,24 +20,24 @@ const FilterRegion = ({
     getCountriesByRegion(region)
   }
   return (
-    <div>
-      <p>{!error ? `${countries.length} resultados` : '0 resultados'}</p>
-      {Object.values(Region).map((region) => (
-        <button
-          key={region}
-          onClick={() => handleRegionClick(region as Region)}
-          style={{
-            padding: '10px 20px',
-            borderRadius: '20px',
-            backgroundColor: activeRegion === region ? '#333' : '#222',
-            color: activeRegion === region ? '#fff' : '#ccc',
-            border: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          {region}
-        </button>
-      ))}
+    <div className='ctn-filter'>
+      <p className='text-result'>
+        {!error ? `${countries.length} resultados` : '0 resultados'}
+      </p>
+      <div className='regions'>
+        {Object.values(Region).map((region) => (
+          <button
+            key={region}
+            onClick={() => handleRegionClick(region as Region)}
+            style={{
+              backgroundColor: activeRegion === region ? '#333' : '#222',
+              color: activeRegion === region ? '#fff' : '#ccc'
+            }}
+          >
+            {region}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

@@ -1,0 +1,29 @@
+.ctn-filter {
+  display: flex;
+  margin-top: 25px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.ctn-filter .regions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ctn-filter .regions button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+.ctn-filter .text-result {
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .ctn-filter {
+    flex-direction: row;
+  }
+}
