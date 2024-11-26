@@ -12,10 +12,13 @@
 }
 .card .info {
   padding: 5px;
-  p,
-  h2 {
-    margin-block: 3px;
-  }
+}
+.card .info p,
+.card .info h2 {
+  margin-block: 3px;
+}
+.card .info .sub-title {
+  font-weight: 500;
 }
 @media (min-width: 768px) {
   .card .image {
