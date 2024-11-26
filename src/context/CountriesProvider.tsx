@@ -25,7 +25,6 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   const [loading, setLoading] = useState(false)
   const [region, setRegion] = useState<Region>(Region.Americas)
   const [currentCountry, setCurrentCountry] = useState<Country[]>([])
-
   const getCountries = useCallback(async () => {
     try {
       setLoading(true)
@@ -55,10 +54,16 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
     try {
       setLoading(true)
       const res = await fetch(`${API_URL}/region/${region}`)
-      const data = await res.json()
-      setCountries((current) => ({ ...current, [region]: data }))
+      if (res.status == 200) {
+        const data = await res.json()
+        setError('')
+        setCountries((current) => ({ ...current, [region]: data }))
+      } else {
+        setError('Error al obtener países')
+      }
     } catch (error) {
       console.error(error)
+      setError('Error al obtener países')
     } finally {
       setLoading(false)
     }
@@ -145,6 +150,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
 
   useEffect(() => {
     getCountries()
+    getCountriesByRegion(Region.Americas)
   }, [])
   return (
     <countriesContext.Provider
