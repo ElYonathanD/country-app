@@ -3,20 +3,21 @@ import { Countries, Country, Region } from '../interfaces/country'
 
 interface Context {
   countries: Countries
+  cleanError: () => void
   currentCountry: Country[]
   error: string
-  loading: boolean
   getCountriesByCapital: (term: string) => void
   getCountriesByRegion: (region: Region) => void
   getCountryByCode: (code: string) => void
+  loading: boolean
   region: Region
   searchCountries: (term: string) => void
 }
 export const countriesContext = createContext<Context>({
   countries: {
     all: [],
-    byName: [],
-    byCapital: [],
+    byName: { term: '', countries: [] },
+    byCapital: { term: '', countries: [] },
     Africa: [],
     Americas: [],
     Antarctic: [],
@@ -24,12 +25,13 @@ export const countriesContext = createContext<Context>({
     Europe: [],
     Oceania: []
   },
-  error: '',
-  loading: false,
+  cleanError: () => [],
   currentCountry: [],
-  region: Region.Americas,
-  getCountriesByRegion: () => [],
-  searchCountries: () => [],
+  error: '',
   getCountriesByCapital: () => [],
-  getCountryByCode: () => []
+  getCountriesByRegion: () => [],
+  getCountryByCode: () => [],
+  loading: false,
+  region: Region.Americas,
+  searchCountries: () => []
 })

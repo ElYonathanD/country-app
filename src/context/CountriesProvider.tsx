@@ -12,8 +12,8 @@ interface CountriesProviderProps {
 export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   const [countries, setCountries] = useState<Countries>({
     all: [],
-    byName: [],
-    byCapital: [],
+    byName: { term: '', countries: [] },
+    byCapital: { term: '', countries: [] },
     Africa: [],
     Americas: [],
     Antarctic: [],
@@ -34,8 +34,8 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         setCountries((current) => ({
           ...current,
           all: data,
-          byName: data,
-          byCapital: data
+          byName: { term: '', countries: data },
+          byCapital: { term: '', countries: data }
         }))
       } else {
         setError('Error al obtener países')
@@ -93,7 +93,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       setError('')
       setCountries((current) => ({
         ...current,
-        byCapital: countries.all
+        byCapital: { term: capital, countries: countries.all }
       }))
       return
     }
@@ -104,7 +104,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         const data = await res.json()
         setCountries((current) => ({
           ...current,
-          byCapital: data
+          byCapital: { term: capital, countries: data }
         }))
         setError('')
       } else {
@@ -123,7 +123,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       setError('')
       setCountries((current) => ({
         ...current,
-        byName: countries.all
+        byName: { term: term, countries: countries.all }
       }))
       return
     }
@@ -134,7 +134,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         const data = await res.json()
         setCountries((current) => ({
           ...current,
-          byName: data
+          byName: { term: term, countries: data }
         }))
         setError('')
       } else {
@@ -148,6 +148,9 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
     }
   }
 
+  const cleanError = () => {
+    setError('')
+  }
   useEffect(() => {
     getCountries()
     getCountriesByRegion(Region.Americas)
@@ -163,7 +166,8 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         getCountriesByRegion,
         searchCountries,
         getCountriesByCapital,
-        getCountryByCode
+        getCountryByCode,
+        cleanError
       }}
     >
       {children}

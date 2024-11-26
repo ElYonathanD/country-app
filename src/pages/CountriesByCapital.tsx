@@ -1,11 +1,20 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import CountriesList from '../components/CountriesList'
 import Search from '../components/Search'
 import { countriesContext } from '../context/countriesContext'
 
 const CountriesByCapital = () => {
-  const { countries, error, getCountriesByCapital, searchCountries, loading } =
-    useContext(countriesContext)
+  const {
+    countries,
+    error,
+    getCountriesByCapital,
+    searchCountries,
+    loading,
+    cleanError
+  } = useContext(countriesContext)
+  useEffect(() => {
+    cleanError()
+  }, [])
   return (
     <>
       <Search
@@ -16,7 +25,7 @@ const CountriesByCapital = () => {
         searchCountries={searchCountries}
       />
       <CountriesList
-        countries={countries.byCapital}
+        countries={countries.byCapital.countries}
         error={error}
         loading={loading}
       />
