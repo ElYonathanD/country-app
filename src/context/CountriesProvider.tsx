@@ -114,7 +114,6 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   }
 
   const searchCountries = async (term: string) => {
-    setLoading(true)
     if (term === '') {
       setError('')
       setCountries((current) => ({
@@ -124,6 +123,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       return
     }
     try {
+      setLoading(true)
       const res = await fetch(`${API_URL}/name/${term}`)
       if (res.status == 200) {
         const data = await res.json()
