@@ -5,13 +5,15 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #1B1D1F;
+  background-color: #1b1d1f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-*, *::before, *::after{
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }

@@ -11,6 +11,7 @@ function App() {
   return (
     <CountriesProvider>
       <BrowserRouter>
+        <h1 className='title'>Country App</h1>
         <Navbar />
         <Routes>
           <Route path='/' element={<Navigate to='/countries-by-name' />} />

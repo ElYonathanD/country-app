@@ -8,3 +8,11 @@
 body {
   margin: 0;
 }
+.title {
+  font-size: 22px;
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: 43px;
+  }
+}
